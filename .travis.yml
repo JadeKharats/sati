@@ -10,8 +10,8 @@ before_install:
   # Setup assets
   - yarn install
   - yarn prod
-script:
-  - crystal spec
+# script:
+#   - crystal spec
   # Uncomment the next line if you'd like Travis to check code formatting
   # - crystal tool format spec src --check
 cache:
@@ -20,3 +20,12 @@ cache:
     - bin/lucky
     - lib
     - .shards
+
+jobs:
+  include:
+    - stage: spec
+      script: crystal spec
+    - stage: ameba
+      script: ./bin/ameba
+    - stage: format
+      script: crystal tool format --check
